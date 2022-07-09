@@ -1,0 +1,46 @@
+// Custom.scss
+// Option A: Include all of Bootstrap
+
+// Include any default variable overrides here (though functions won't be available)
+// Create your own map
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+@import "node_modules/bootstrap/scss/utilities";
+//add additional colors
+$custom-colors: (
+    "test": red,
+);
+//overrider utilities -> using the same key and change
+$utilities: (
+    "width": (
+        property: width,
+        class: w,
+        values: (
+          25: 15%,
+          50: 50%,
+          75: 75%,
+          100: 100%,
+          auto: auto,
+          fit: fit-content
+        )
+      ),
+);
+// add utilities -> use map-merge and add utilities
+$utilities: map-merge(
+  $utilities,
+  (
+    "cursor": (
+      property: cursor,
+      class: cursor,
+      responsive: true,
+      values: auto pointer grab, //possible value -> cursor-auto cursor-pointer
+    ),
+  )
+);    
+// Merge the maps
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+@import "/node_modules/bootstrap/scss/bootstrap";
+
+// Then add additional custom code here
