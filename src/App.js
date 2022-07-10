@@ -1,15 +1,20 @@
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
-
+import NavBar from './components/NavBar'
+import Home from './pages/Home'
+import SignIn from './pages/SignIn'
+import SignUp from './pages/SignUp'
 function App() {
   return (
-    <div className='App'>
-      <button type='button' className='btn btn-primary mt-3'>
-        Test
-      </button>
-      <button type='button' className='btn btn-test text-white mt-3 cursor-pointer'>
-        Test
-      </button>
-    </div>
+    <>
+      <NavBar />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<SignIn />} />
+        <Route path='/register' element={<SignUp />} />
+        <Route path='/card' element={<SignUp />} />
+      </Routes>
+    </>
   )
 }
 
