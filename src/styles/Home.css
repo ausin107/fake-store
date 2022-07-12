@@ -1,0 +1,15 @@
+.product:hover {
+  opacity: 1;
+}
+.product svg {
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+.product:hover svg {
+  visibility: visible;
+}
+.product {
+  opacity: 0.85;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}

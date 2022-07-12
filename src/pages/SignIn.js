@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState, useEffect, useRef } from 'react'
-import { Card, Form, Button, Alert } from 'react-bootstrap'
+import { Card, Form, Button, Alert, Spinner } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../firebase'
 import { loginSuccess, loginFail, startLogin } from '../components/auth/authSlice'
@@ -11,6 +11,7 @@ export default function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const dispath = useDispatch()
+  const navigate = useNavigate()
   const isLogin = useSelector((state) => state.isAuth.isAuth)
   const isLoading = useSelector((state) => state.isAuth.isLoading)
   const handleSubmit = async (e) => {
@@ -21,6 +22,9 @@ export default function SignIn() {
         dispath(loginSuccess(auth.currentUser.uid))
         window.localStorage.setItem('authKey', auth.currentUser.uid)
         setError(false)
+        setTimeout(() => {
+          navigate('/')
+        }, 1000)
       })
       .catch((err) => {
         dispath(loginFail())
@@ -72,10 +76,16 @@ export default function SignIn() {
                 required
               />
             </Form.Group>
-
-            <Button disabled={!!isLoading} variant='primary' className='mt-4 w-100' type='submit'>
-              Login
-            </Button>
+            {!!isLoading ? (
+              <Button variant='primary' type='submit' className='mt-4 w-100' disabled>
+                <Spinner as='span' animation='grow' size='sm' role='status' aria-hidden='true' />
+                Loading...
+              </Button>
+            ) : (
+              <Button variant='primary' className='mt-4 w-100' type='submit'>
+                Login
+              </Button>
+            )}
           </Form>
         </Card.Body>
       </Card>

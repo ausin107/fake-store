@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect, useRef } from 'react'
-import { Card, Form, Button, Alert } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Card, Form, Button, Alert, Spinner } from 'react-bootstrap'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../firebase'
@@ -13,6 +13,7 @@ export default function SignUp() {
   const [error, setError] = useState()
   const [isRegisterSuccess, setRegisterSuccess] = useState(false)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const isLoading = useSelector((state) => state.isAuth.isLoading)
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -22,6 +23,7 @@ export default function SignUp() {
         .then(() => {
           dispatch(registerSuccess())
           setRegisterSuccess(true)
+          navigate('/')
         })
         .catch((err) => {
           dispatch(registerSuccess())
@@ -88,9 +90,16 @@ export default function SignUp() {
                 required
               />
             </Form.Group>
-            <Button disabled={!!isLoading} variant='primary' className='mt-4 w-100' type='submit'>
-              Register
-            </Button>
+            {!!isLoading ? (
+              <Button variant='primary' type='submit' className='mt-4 w-100' disabled>
+                <Spinner as='span' animation='grow' size='sm' role='status' aria-hidden='true' />
+                Loading...
+              </Button>
+            ) : (
+              <Button variant='primary' className='mt-4 w-100' type='submit'>
+                Register
+              </Button>
+            )}
           </Form>
         </Card.Body>
       </Card>
