@@ -21,6 +21,9 @@ export default function DetailProduct() {
   const handleAddProduct = () => {
     const product = {
       id: productId,
+      title: data.title,
+      price: data.price,
+      image: data.image,
       quantity: quantity,
     }
     dispath(addProduct(product))

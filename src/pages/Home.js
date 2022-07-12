@@ -39,6 +39,9 @@ export default function Home() {
               e.stopPropagation()
               const productInfo = {
                 id: product.id,
+                price: product.price,
+                title: product.title,
+                image: product.image,
                 quantity: 1,
               }
               dispath(addProduct(productInfo))

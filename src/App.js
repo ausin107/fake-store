@@ -5,6 +5,7 @@ import DetailProduct from './pages/DetailProduct'
 import Home from './pages/Home'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
+import Cart from './pages/Cart'
 function App() {
   return (
     <>
@@ -14,7 +15,7 @@ function App() {
         <Route path='/products/:productId' element={<DetailProduct />} />
         <Route path='/login' element={<SignIn />} />
         <Route path='/register' element={<SignUp />} />
-        <Route path='/card' element={<SignUp />} />
+        <Route path='/card' element={<Cart />} />
       </Routes>
     </>
   )
