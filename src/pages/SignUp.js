@@ -23,7 +23,7 @@ export default function SignUp() {
         .then(() => {
           dispatch(registerSuccess())
           setRegisterSuccess(true)
-          navigate('/')
+          navigate('/login')
         })
         .catch((err) => {
           dispatch(registerSuccess())

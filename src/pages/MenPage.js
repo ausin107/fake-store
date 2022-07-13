@@ -4,12 +4,14 @@ import Products from '../components/Products'
 import axios from 'axios'
 import Banner from '../components/Banner'
 import '../styles/Home.css'
-export default function Home() {
+export default function MenPage() {
   const [products, setProducts] = useState()
   useEffect(() => {
     async function getProducts() {
       try {
-        const result = await axios.get('https://fakestoreapi.com/products')
+        const result = await axios.get(
+          `https://fakestoreapi.com/products/category/men's%20clothing`
+        )
         setProducts(result.data)
         // console.log(result.data)
       } catch (err) {

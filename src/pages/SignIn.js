@@ -24,6 +24,7 @@ export default function SignIn() {
         setError(false)
         setTimeout(() => {
           navigate('/')
+          window.location.reload()
         }, 1000)
       })
       .catch((err) => {
